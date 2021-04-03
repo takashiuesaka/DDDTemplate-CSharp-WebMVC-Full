@@ -4,4 +4,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="domain\model\" />
+    <Folder Include="domain\service\" />
+    <Folder Include="domain\shared\" />
+    <Folder Include="application\" />
+  </ItemGroup>
+
 </Project>
