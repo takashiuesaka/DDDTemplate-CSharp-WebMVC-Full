@@ -23,6 +23,10 @@ namespace Sample.WebMVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Dependency Injection
+            Sample.Core.DependencyInjection.SetUp(services);
+            Sample.Infrastructure.DependencyInjection.SetUp(services);
+
             services.AddControllersWithViews();
         }
 

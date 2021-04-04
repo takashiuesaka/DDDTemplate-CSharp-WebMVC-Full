@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Sample.Core.interfaces;
+using Sample.Core.interfaces.dto;
 using Sample.WebMVC.Models;
 using System;
 using System.Collections.Generic;
@@ -13,14 +15,19 @@ namespace Sample.WebMVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private ITimeRecordingUseCase TimeRecordingUseCase { get; }
+
+        public HomeController(ITimeRecordingUseCase timeRecordingUseCase, ILogger<HomeController> logger)
         {
+            this.TimeRecordingUseCase = timeRecordingUseCase;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IReadOnlyList<DailyTimeRecordDto> listDailyTimeRecord = this.TimeRecordingUseCase.ListDailyRecord();
+
+            return View(listDailyTimeRecord);
         }
 
         public IActionResult Privacy()

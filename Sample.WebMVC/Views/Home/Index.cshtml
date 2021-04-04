@@ -1,8 +1,30 @@
-﻿@{
+﻿@model IReadOnlyList<Sample.Core.interfaces.dto.DailyTimeRecordDto>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Date</td>
+            <td>Start Time</td>
+            <td>End Time</td>
+            <td>Break</td>
+            <td>Worktime</td>
+            <td>Overtime</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dailyTimeRecordDto in Model)
+        {
+            <tr>
+                <td>@dailyTimeRecordDto.Date.ToString("yyyy/M/d")</td>
+                <td>@dailyTimeRecordDto.StartTime.ToString("hh:mm")</td>
+                <td>@dailyTimeRecordDto.EndTime.ToString("hh:mm")</td>
+                <td>@(dailyTimeRecordDto.BreakTime != TimeSpan.Zero ? dailyTimeRecordDto.BreakTime.ToString(@"hh\:mm") : "00:00")</td>
+                <td>@(dailyTimeRecordDto.Worktime != TimeSpan.Zero ? dailyTimeRecordDto.Worktime.ToString(@"hh\:mm") : "00:00")</td>
+                <td>@(dailyTimeRecordDto.Overtime != TimeSpan.Zero ? dailyTimeRecordDto.Overtime.ToString(@"hh\:mm") : "00:00")</td>
+            </tr>
+        }
+    </tbody>
+</table>
