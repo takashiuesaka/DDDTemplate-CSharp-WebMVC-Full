@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Sample.Core.interfaces;
 using Sample.Core.interfaces.dto;
+using Sample.WebMVC.Command;
 using Sample.WebMVC.Models;
 using System;
 using System.Collections.Generic;
@@ -23,11 +24,19 @@ namespace Sample.WebMVC.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             IReadOnlyList<DailyTimeRecordDto> listDailyTimeRecord = this.TimeRecordingUseCase.ListDailyRecord();
 
             return View(listDailyTimeRecord);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(DailyTimeRecordEditCommand dailyTimeRecordEditCommand)
+        {
+            // TODO: Update Domain
+            return Ok();
         }
 
         public IActionResult Privacy()
