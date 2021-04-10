@@ -8,7 +8,10 @@ namespace Sample.Core.domain.shared
     {
         private Guid InnerId { get; }
 
-        public string Id() => this.InnerId.ToString();
+        public string Id
+        {
+            get { return this.InnerId.ToString(); }
+        }
 
         public Identity()
         {

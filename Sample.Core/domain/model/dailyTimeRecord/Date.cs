@@ -11,6 +11,10 @@ namespace Sample.Core.domain.model.dailyTimeRecord
 
         public Date(DateTime date)
         {
+            if (date == DateTime.MinValue)
+            {
+                throw new ArgumentException("Date クラスのコンストラクタに DateTime.MinValueが渡されました。西暦0001年はあり得ません。", "date");
+            }
             this.DateTime = date;
         }
 

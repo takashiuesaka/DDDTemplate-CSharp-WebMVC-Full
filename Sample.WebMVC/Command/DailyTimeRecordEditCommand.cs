@@ -7,6 +7,7 @@ namespace Sample.WebMVC.Command
 {
     public class DailyTimeRecordEditCommand
     {
+        public string Id { get; set; }
 
         public DateTime Date { get; set; }
 

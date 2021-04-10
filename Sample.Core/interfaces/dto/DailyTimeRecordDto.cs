@@ -6,8 +6,9 @@ namespace Sample.Core.interfaces.dto
 {
     public class DailyTimeRecordDto
     {
-        public DailyTimeRecordDto(DateTime date, DateTime startTime, DateTime endTime, TimeSpan breakTime, TimeSpan workTime, TimeSpan overTime)
+        public DailyTimeRecordDto(string id, DateTime date, DateTime startTime, DateTime endTime, TimeSpan breakTime, TimeSpan workTime, TimeSpan overTime)
         {
+            Id = id;
             Date = date;
             StartTime = startTime;
             EndTime = endTime;
@@ -15,6 +16,8 @@ namespace Sample.Core.interfaces.dto
             Worktime = workTime;
             Overtime = overTime;
         }
+
+        public string Id { get; }
 
         public DateTime Date { get; }
 

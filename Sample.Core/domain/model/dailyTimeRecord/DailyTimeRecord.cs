@@ -8,8 +8,9 @@ namespace Sample.Core.domain.model.dailyTimeRecord
     internal class DailyTimeRecord : Entity<DailyTimeRecord>
     {
 
-        public DailyTimeRecord(Identity identity, Date date, Time startTime, Time endTime, Duration breakTime, Duration workTime, Duration overTime) : base(identity)
+        public DailyTimeRecord(Identity identity, DateTime date, DateTime startTime, DateTime endTime, TimeSpan breakTime, TimeSpan workTime, TimeSpan overTime) : base(identity)
         {
+            base.Id = identity;
             Date = date;
             StartTime = startTime;
             EndTime = endTime;
@@ -18,16 +19,25 @@ namespace Sample.Core.domain.model.dailyTimeRecord
             OverTime = overTime;
         }
 
-        public Date Date { get; }
+        public DailyTimeRecord UpdateStartTime(Time startTime)
+        {
+            Duration newWorkTime = startTime - EndTime;
+            return new DailyTimeRecord(
+                base.Id, Date, startTime,
+                EndTime, BreakTime, WorkTime,
+                );
+        }
 
-        public Time StartTime { get; }
+        public DateTime Date { get; }
 
-        public Time EndTime { get; }
+        public DateTime StartTime { get; }
 
-        public Duration BreakTime { get; }
+        public DateTime EndTime { get; }
 
-        public Duration WorkTime { get; }
+        public TimeSpan BreakTime { get; }
 
-        public Duration OverTime { get; }
+        public TimeSpan WorkTime { get; }
+
+        public TimeSpan OverTime { get; }
     }
 }

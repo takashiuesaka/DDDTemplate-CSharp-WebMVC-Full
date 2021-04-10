@@ -9,6 +9,11 @@ namespace Sample.Core.domain.model.dailyTimeRecord
     {
         public DateTime DateTime { get; }
 
+        public Time(string time)
+        {
+            this.DateTime = DateTime.Parse(time);
+        }
+
         public Time(DateTime dateTime)
         {
             this.DateTime = dateTime;

@@ -35,8 +35,21 @@ namespace Sample.WebMVC.Controllers
         [HttpPost]
         public IActionResult Edit(DailyTimeRecordEditCommand dailyTimeRecordEditCommand)
         {
-            // TODO: Update Domain
-            return Ok();
+            try
+            {
+                this.TimeRecordingUseCase.UpdateDailyTime(
+                    dailyTimeRecordEditCommand.Id,
+                    dailyTimeRecordEditCommand.Date,
+                    dailyTimeRecordEditCommand.StartTime,
+                    dailyTimeRecordEditCommand.EndTime);
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public IActionResult Privacy()

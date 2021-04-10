@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="domain\service\" />
-    <Folder Include="application\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -19,7 +19,9 @@
         @foreach (var dailyTimeRecord in Model)
         {
         <tr>
-            <td><input type="button" class="btn-primary" onclick="showEditDialog('@dailyTimeRecord.Date.ToString("yyyy/M/d")', '@dailyTimeRecord.StartTime.ToString("hh:mm")', '@dailyTimeRecord.EndTime.ToString("hh:mm")')" value="Edit" /></td>
+            <td>                
+                <input type="button" class="btn-primary" onclick="showEditDialog('@dailyTimeRecord.Id', '@dailyTimeRecord.Date.ToString("yyyy/M/d")', '@dailyTimeRecord.StartTime.ToString("hh:mm")', '@dailyTimeRecord.EndTime.ToString("hh:mm")')" value="Edit" />
+            </td>
             <td>@dailyTimeRecord.Date.ToString("yyyy/M/d")</td>
             <td>@dailyTimeRecord.StartTime.ToString("hh:mm")</td>
             <td>@dailyTimeRecord.EndTime.ToString("hh:mm")</td>
@@ -36,34 +38,34 @@
     @using (Html.BeginForm())
     {
         @Html.ValidationSummary(true)
-        <fieldset>
-            <legend>Edit Time Record</legend>
+    <fieldset>
+        @Html.Hidden("Id")
+        <div class="form-group">
+            @Html.Label("Date", "Date")
+            @Html.TextBox("Date", "", new { @class = "form-control-plaintext", @readonly = "readnoly" } )
+        </div>
+        <div class="form-group">
+            @Html.Label("StartTime", "StartTime")
+            @Html.ValidationMessage("StartTime")
+            @Html.TextBox("StartTime", "", new { @class = "form-control" })
+        </div>
 
-            @Html.Hidden("Date")
-            <div class="editor-label">
-                @Html.Label("StartTime", "StartTime")
-            </div>
-            <div class="editor-field">
-                @Html.TextBox("StartTime")
-                @Html.ValidationMessage("StartTime")
-            </div>
+        <div class="form-group">
+            @Html.Label("EndTime", "EndTime")
+            @Html.ValidationMessage("EndTime")
+            @Html.TextBox("EndTime", "", new { @class = "form-control" })
+        </div>
 
-            <div class="editor-label">
-                @Html.Label("EndTime", "EndTime")
-            </div>
-            <div class="editor-field">
-                @Html.TextBox("EndTime")
-                @Html.ValidationMessage("EndTime")
-            </div>
-
-        </fieldset>
+    </fieldset>
     }
 </div>
 
 @section Scripts {
     <script type="text/javascript">
-        function setDataToForm(date, startTime, endTime) {
+        function setDataToForm(id, date, startTime, endTime) {
             $("#editDialog form")
+                .find("input[id=Id]").val(id)
+                .end()
                 .find("input[id=Date]").val(date)
                 .end()
                 .find("input[id=StartTime]").val(startTime)
@@ -71,9 +73,9 @@
                 .find("input[id=EndTime]").val(endTime);
         }
 
-        function showEditDialog(date, startTime, endTime) {
+        function showEditDialog(id, date, startTime, endTime) {
 
-            setDataToForm(date, startTime, endTime);
+            setDataToForm(id, date, startTime, endTime);
 
             $("#editDialog").dialog({
                 title: "Edit Time Record",
@@ -82,7 +84,7 @@
                 modal: true,
                 buttons: {
                     "Update": function () {
-                        $.post("/Home/Edit", { Date: $("#Date").val(), StartTime: $("#StartTime").val(), EndTime: $("#EndTime").val()})
+                        $.post("/Home/Edit", { Id: $("#Id").val(), Date: $("#Date").val(), StartTime: $("#StartTime").val(), EndTime: $("#EndTime").val()})
                             .fail()
                             .done(() => {
                                 $(this).dialog("close");

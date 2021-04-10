@@ -16,6 +16,7 @@ namespace Sample.Core.interfaces.impl.modelConverter
             {
                 result.Add(
                     new DailyTimeRecordDto(
+                        id: dailyTimeRecord.Id.Id,
                         date: dailyTimeRecord.Date.DateTime,
                         startTime: dailyTimeRecord.StartTime.DateTime,
                         endTime: dailyTimeRecord.EndTime.DateTime,
