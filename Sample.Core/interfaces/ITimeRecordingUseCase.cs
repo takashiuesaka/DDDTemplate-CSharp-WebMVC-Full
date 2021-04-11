@@ -8,6 +8,6 @@ namespace Sample.Core.interfaces
     public interface ITimeRecordingUseCase
     {
         IReadOnlyList<DailyTimeRecordDto> ListDailyRecord();
-        void UpdateDailyTime(string id, DateTime date, string startTime, string endTime);
+        void UpdateDailyTime(string id, DateTime date, int startTimeHour, int startTimeMinute, int endTimeHour, int endTimeMinute);
     }
 }

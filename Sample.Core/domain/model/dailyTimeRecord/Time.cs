@@ -7,22 +7,35 @@ namespace Sample.Core.domain.model.dailyTimeRecord
 {
     internal class Time : ValueObject<Time>
     {
-        public DateTime DateTime { get; }
+        public DateTime CalendarDateTime { get; }
 
-        public Time(string time)
+        private Time(DateTime dateTime)
         {
-            this.DateTime = DateTime.Parse(time);
-        }
-
-        public Time(DateTime dateTime)
-        {
-            this.DateTime = dateTime;
+            this.CalendarDateTime = dateTime;
         }
 
         public override bool SameValueAs(Time other)
         {
-            return this.DateTime == other.DateTime;
+            return this.CalendarDateTime == other.CalendarDateTime;
         }
 
+        public static Time Create(CalendarDate date, int hour, int minute)
+        {
+            var tempTime = date.DateTime.AddHours(hour).AddMinutes(minute);
+            var newDateTime = date.DateTime.AddHours(5);
+
+            if (date.DateTime <= tempTime && tempTime < newDateTime)
+            {
+                return new Time(date.DateTime.AddDays(1).AddHours(hour).AddMinutes(minute));
+            }
+
+            return new Time(date.DateTime.AddHours(hour).AddMinutes(minute));
+        }
+
+        public static Time Create(DateTime dateTime)
+        {
+            return new Time(dateTime);
+        }
     }
+
 }

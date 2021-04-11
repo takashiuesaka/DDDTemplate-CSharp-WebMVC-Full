@@ -37,11 +37,16 @@ namespace Sample.WebMVC.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
                 this.TimeRecordingUseCase.UpdateDailyTime(
                     dailyTimeRecordEditCommand.Id,
                     dailyTimeRecordEditCommand.Date,
-                    dailyTimeRecordEditCommand.StartTime,
-                    dailyTimeRecordEditCommand.EndTime);
+                    dailyTimeRecordEditCommand.GetStartTimeHour(), dailyTimeRecordEditCommand.GetStartTimeMinute(),
+                    dailyTimeRecordEditCommand.GetEndTimeHour(), dailyTimeRecordEditCommand.GetEndTimeMinute());
 
                 return Ok();
             }

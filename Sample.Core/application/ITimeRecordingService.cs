@@ -8,6 +8,6 @@ namespace Sample.Core.application
 {
     internal interface ITimeRecordingService
     {
-        void UpdateDailyTime(Identity identity, Date date, Time startTime, Time endTime);
+        void UpdateDailyTime(Identity identity, CalendarDate date, Time startTime, Time endTime);
     }
 }

@@ -15,12 +15,11 @@ namespace Sample.Core.application.impl
             this.DailyTimeRecordRepository = dailyTimeRecordRepository;
         }
 
-        public void UpdateDailyTime(Identity id, Date date, Time startTime, Time endTime)
+        public void UpdateDailyTime(Identity id, CalendarDate date, Time startTime, Time endTime)
         {
             DailyTimeRecord dailyTimeRecord = this.DailyTimeRecordRepository.GetById(id);
 
-            dailyTimeRecord.UpdateStartTime(startTime);
-            dailyTimeRecord.UpdateEndTime(endTime);
+            dailyTimeRecord.Recalcurate(startTime, endTime);
 
             this.DailyTimeRecordRepository.Update(dailyTimeRecord);
         }

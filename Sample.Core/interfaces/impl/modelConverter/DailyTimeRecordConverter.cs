@@ -17,12 +17,12 @@ namespace Sample.Core.interfaces.impl.modelConverter
                 result.Add(
                     new DailyTimeRecordDto(
                         id: dailyTimeRecord.Id.Id,
-                        date: dailyTimeRecord.Date.DateTime,
-                        startTime: dailyTimeRecord.StartTime.DateTime,
-                        endTime: dailyTimeRecord.EndTime.DateTime,
-                        breakTime: dailyTimeRecord.BreakTime.TimeSpan,
-                        workTime: dailyTimeRecord.WorkTime.TimeSpan,
-                        overTime: dailyTimeRecord.OverTime.TimeSpan));
+                        date: dailyTimeRecord.CalendarDate.DateTime,
+                        startTime: dailyTimeRecord.StartTime.CalendarDateTime,
+                        endTime: dailyTimeRecord.EndTime.CalendarDateTime,
+                        breakTime: dailyTimeRecord.BreakTime,
+                        workTime: dailyTimeRecord.WorkingHours,
+                        overTime: dailyTimeRecord.OvertimeHours));
             }
 
             return result;

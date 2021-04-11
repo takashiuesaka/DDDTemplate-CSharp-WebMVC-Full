@@ -30,9 +30,13 @@ namespace Sample.Core.interfaces.impl
             return DailyTimeRecordConverter.ToListDto(listDailyTimeRecord);
         }
 
-        public void UpdateDailyTime(string id, DateTime date, string startTime, string endTime)
+        public void UpdateDailyTime(string id, DateTime date, int startTimeHour, int startTimeMinute, int endTimeHour, int endTimeMinute)
         {
-            this.TimeRecordingService.UpdateDailyTime(new Identity(id), new Date(date), new Time(startTime), new Time(endTime));
+            var targetDate = new CalendarDate(date);
+            var targetStartTime = Time.Create(targetDate, startTimeHour, startTimeMinute);
+            var targetEndTime = Time.Create(targetDate, endTimeHour, endTimeMinute);
+
+            this.TimeRecordingService.UpdateDailyTime(new Identity(id), targetDate, targetStartTime, targetEndTime);
         }
     }
 }

@@ -15,3 +15,4 @@ using System.Runtime.InteropServices;
 [assembly: Guid("ffad862b-7362-4113-a16c-cf4406246e70")]
 
 [assembly: InternalsVisibleTo("Sample.Infrastructure")]
+[assembly: InternalsVisibleTo("Sample.Core.Test")]
